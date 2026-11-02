@@ -35,10 +35,6 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
     ],
-    devtool: 'inline-source-map',
-    devServer: {
-        static: path.resolve(import.meta.dirname, './dist'),
-    },
 };
 
 export default baseConfig;
