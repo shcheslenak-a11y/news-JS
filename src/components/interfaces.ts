@@ -23,11 +23,11 @@ export interface Article {
     content: string;
 }
 
-export interface SourceResponse extends ParsedResponse{
+export interface SourceResponse extends ParsedResponse {
     sources: Array<Source>;
 }
 
-export interface ArticleResponse extends ParsedResponse{
+export interface ArticleResponse extends ParsedResponse {
     totalResults: number;
     articles: Array<Article>;
 }

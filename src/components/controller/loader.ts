@@ -1,4 +1,4 @@
-import { Request} from '../interfaces';
+import { Request } from '../interfaces';
 
 class Loader {
     private baseLink: string;
@@ -29,7 +29,7 @@ class Loader {
     }
 
     makeUrl(options: Record<string, string>, endpoint: string) {
-        const urlOptions: Record<string, string> = {...options };
+        const urlOptions: Record<string, string> = { ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
@@ -40,7 +40,7 @@ class Loader {
     }
 
     load<Type>(method: string, endpoint: string, callback: (a: Type) => void, options = {}) {
-        fetch(this.makeUrl(options, endpoint), { method, headers: {'X-Api-Key': this.options.apiKey}})
+        fetch(this.makeUrl(options, endpoint), { method, headers: { 'X-Api-Key': this.options.apiKey } })
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data) => callback(data))
