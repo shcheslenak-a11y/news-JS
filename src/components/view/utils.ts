@@ -5,12 +5,10 @@ export default function adjustNews(){
     const heightNumber = Math.floor((height + 30) / 350);
     const totalNumber = widthNumber * heightNumber;
     const childs = news.children
-    console.log(widthNumber, heightNumber, totalNumber )
     for(let child_index=0;  child_index < childs.length; child_index+=1){
         if(child_index >= totalNumber)
             (childs[child_index] as HTMLElement).classList.add("hide")
         else (childs[child_index] as HTMLElement).classList.remove('hide');
-        console.log(child_index);
     }
     
 }

@@ -1,6 +1,6 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { ParsedResponse } from '../interfaces';
+import { SourceResponse, ArticleResponse } from '../interfaces';
 import adjustNews from '../view/utils';
 
 class App {
@@ -16,9 +16,9 @@ class App {
         document
             .querySelector('.sources')!
             .addEventListener('click', (e) =>
-                this.controller.getNews(e, (data: ParsedResponse) => {this.view.drawNews(data);adjustNews()})
+                this.controller.getNews(e, (data: ArticleResponse) => {this.view.drawNews(data); adjustNews()})
             );
-        this.controller.getSources((data: ParsedResponse) => this.view.drawSources(data));
+        this.controller.getSources((data: SourceResponse) => this.view.drawSources(data));
         window.addEventListener('resize', adjustNews)
     }
 }

@@ -1,4 +1,4 @@
-import { Request, ParsedResponse } from '../interfaces';
+import { Request} from '../interfaces';
 
 class Loader {
     private baseLink: string;
@@ -9,13 +9,13 @@ class Loader {
         this.options = options;
     }
 
-    getResp(
+    getResp<Type>(
         { endpoint, options = {} }: Request,
-        callback: (data: ParsedResponse) => void = () => {
+        callback: (data: Type) => void = () => {
             console.error('No callback for GET response');
         }
     ) {
-        this.load('GET', endpoint, callback, options);
+        this.load<Type>('GET', endpoint, callback, options);
     }
 
     errorHandler(res: Response) {
@@ -29,7 +29,7 @@ class Loader {
     }
 
     makeUrl(options: Record<string, string>, endpoint: string) {
-        const urlOptions: Record<string, string> = { ...this.options, ...options };
+        const urlOptions: Record<string, string> = {...options };
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
@@ -39,8 +39,8 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (a: ParsedResponse) => void, options = {}) {
-        fetch(this.makeUrl(options, endpoint), { method })
+    load<Type>(method: string, endpoint: string, callback: (a: Type) => void, options = {}) {
+        fetch(this.makeUrl(options, endpoint), { method, headers: {'X-Api-Key': this.options.apiKey}})
             .then(this.errorHandler)
             .then((res) => res.json())
             .then((data) => callback(data))

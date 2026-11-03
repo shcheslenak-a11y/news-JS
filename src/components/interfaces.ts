@@ -3,11 +3,8 @@ export interface Request {
     options?: Record<string, string>;
 }
 
-export interface ParsedResponse {
+interface ParsedResponse {
     status: string;
-    totalResults?: number;
-    articles?: Array<Article>;
-    sources?: Array<Source>;
 }
 
 export interface Source {
@@ -24,4 +21,13 @@ export interface Article {
     urlToImage: string;
     publishedAt: string;
     content: string;
+}
+
+export interface SourceResponse extends ParsedResponse{
+    sources: Array<Source>;
+}
+
+export interface ArticleResponse extends ParsedResponse{
+    totalResults: number;
+    articles: Array<Article>;
 }

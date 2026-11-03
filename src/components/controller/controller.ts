@@ -1,9 +1,9 @@
 import AppLoader from './appLoader';
-import { ParsedResponse } from '../interfaces';
+import { SourceResponse, ArticleResponse } from '../interfaces';
 
 class AppController extends AppLoader {
-    getSources(callback: (data: ParsedResponse) => void) {
-        super.getResp(
+    getSources(callback: (data: SourceResponse) => void) {
+        super.getResp<SourceResponse>(
             {
                 endpoint: 'sources',
             },
@@ -11,7 +11,7 @@ class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: (data: ParsedResponse) => void) {
+    getNews(e: Event, callback: (data: ArticleResponse) => void) {
         let target = e.target as HTMLElement;
         const newsContainer = e.currentTarget as HTMLElement;
 
@@ -20,7 +20,7 @@ class AppController extends AppLoader {
                 const sourceId = target.getAttribute('data-source-id');
                 if (sourceId && newsContainer.getAttribute('data-source') !== sourceId) {
                     newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
+                    super.getResp<ArticleResponse>(
                         {
                             endpoint: 'everything',
                             options: {
